@@ -42,9 +42,46 @@ def main():
                 if event.key == pygame.K_PAGEUP:
                     if map_.zoom < 19:
                         map_.zoom += 1
+
                 elif event.key == pygame.K_PAGEDOWN:
                     if map_.zoom > 0:
                         map_.zoom -= 1
+
+                elif event.key == pygame.K_UP:
+                    if 19 >= map_.zoom >= 10:
+                        map_.lat += 0.0015
+                    elif 9 >= map_.zoom >= 0:
+                        map_.lat += 1.0015
+
+                    if map_.lat > 90:
+                        map_.lat = 90
+
+                elif event.key == pygame.K_DOWN:
+                    if 19 >= map_.zoom >= 10:
+                        map_.lat -= 0.0015
+                    elif 9 >= map_.zoom >= 0:
+                        map_.lat -= 1.0015
+
+                    if map_.lat < -90:
+                        map_.lat = -90
+
+                elif event.key == pygame.K_RIGHT:
+                    if 19 >= map_.zoom >= 10:
+                        map_.lon += 0.0015
+                    elif 9 >= map_.zoom >= 0:
+                        map_.lon += 1.0015
+
+                    if map_.lon > 180:
+                        map_.lon = -180
+
+                elif event.key == pygame.K_LEFT:
+                    if 19 >= map_.zoom >= 10:
+                        map_.lon -= 0.0015
+                    elif 9 >= map_.zoom >= 0:
+                        map_.lon -= 1.0015
+
+                    if map_.lon < -180:
+                        map_.lon = 180
 
         map_file = load_map(map_)
         screen.blit(pygame.image.load(map_file), (0, 0))
